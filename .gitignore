@@ -7,6 +7,12 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 
+# Pixi / conda package local artifacts
+.pixi/
+dist/
+output/
+*.conda
+
 # Build output directory
 build/
 

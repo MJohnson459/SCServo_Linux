@@ -1,0 +1,23 @@
+[workspace]
+authors = ["Michael Johnson <mjohnson459@gmail.com>"]
+channels = ["conda-forge"]
+name = "scservo-linux"
+platforms = ["linux-64", "linux-aarch64"]
+version = "1.0.0"
+preview = ["pixi-build"]
+
+[package]
+name = "scservo-linux"
+version = { workspace = true }
+homepage = "https://github.com/MJohnson459/SCServo_Linux"
+license = "MIT"
+license-file = "LICENSE"
+
+[package.build]
+backend = { name = "pixi-build-cmake", version = "*", channels = [
+    "conda-forge",
+] }
+
+[tasks]
+build-package = "pixi publish --target-dir dist"
+publish-package = "pixi publish --to https://prefix.dev/auldbot-forge"
