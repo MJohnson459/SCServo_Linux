@@ -65,29 +65,50 @@ A high-performance Linux SDK for controlling Feetech SMS/STS/SCSCL/HLSCL series 
 
 ## Installation
 
-### Prerequisites
+### Pixi
+
+If you want to include this library in a pixi project, it is published on the `https://prefix.dev/robot` public channel.
+
+```toml
+[workspace]
+channels = ["https://prefix.dev/robot"]
+platforms = ["linux-64", "linux-aarch64"]
+
+[dependencies]
+scservo-linux = ">=1.0.0"
+```
+
+### From source
+
+Otherwise you can clone this git repo and install via cmake:
+
+#### Prerequisites
 
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential cmake git
 ```
 
-### Build from Source
+#### Build and install
 
 ```bash
-# Clone repository
-git clone https://github.com/adityakamath/SCServo_Linux.git
+git clone https://github.com/MJohnson459/SCServo_Linux.git
 cd SCServo_Linux
-
-# Build library
-mkdir -p build
-cd build
-cmake ..
-make -j4
-
-# The build produces:
-# - build/libSCServo.a (static library)
+cmake -S . -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake --build build
+sudo cmake --install build
 ```
+
+### Use in a CMake project
+
+Once the SDK is installed on your machine using either option above, then in your **CMakeLists.txt**:
+
+```cmake
+find_package(SCServo CONFIG REQUIRED)
+target_link_libraries(my_target PRIVATE SCServo::SCServo)
+```
+
+With that link line, `#include "SMS_STS.h"` (or `#include "SCServo.h"`) resolves against the installed headers under `include/scservo/`.
 
 ### Serial Port Permissions
 
