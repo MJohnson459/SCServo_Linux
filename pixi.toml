@@ -6,6 +6,12 @@ platforms = ["linux-64", "linux-aarch64"]
 version = "1.0.0"
 preview = ["pixi-build"]
 
+# Default environment: toolchain to develop the library locally (`pixi run build`).
+[dependencies]
+cmake = ">=3.14,<5"
+cxx-compiler = "*"
+ninja = "*"
+
 [package]
 name = "scservo-linux"
 version = { workspace = true }
@@ -19,5 +25,5 @@ backend = { name = "pixi-build-cmake", version = "*", channels = [
 ] }
 
 [tasks]
-build-package = "pixi publish --target-dir dist"
-publish-package = "pixi publish --to https://prefix.dev/auldbot-forge"
+build = "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build build"
+publish = "pixi publish --to https://prefix.dev/auldbot-forge && pixi publish --target-platform linux-aarch64 --to https://prefix.dev/auldbot-forge"

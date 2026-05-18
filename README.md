@@ -65,64 +65,51 @@ A high-performance Linux SDK for controlling Feetech SMS/STS/SCSCL/HLSCL series 
 
 ## Installation
 
-### Prerequisites
+### Pixi
+
+If you want to include this library in a pixi project, it is published on the `https://prefix.dev/auldbot-forge` public channel.
+
+```toml
+[workspace]
+channels = ["https://prefix.dev/auldbot-forge", ...]
+platforms = ["linux-64", "linux-aarch64"]
+
+[dependencies]
+scservo-linux = ">=1.0.0"
+...
+```
+
+### From source
+
+Otherwise you can clone this git repo and install via cmake:
+
+#### Prerequisites
 
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential cmake git
 ```
 
-### Build from Source
+#### Build and install
 
 ```bash
-# Clone repository
-git clone https://github.com/adityakamath/SCServo_Linux.git
+git clone https://github.com/MJohnson459/SCServo_Linux.git
 cd SCServo_Linux
-
-# Configure and build
-cmake -S . -B build -G Ninja
-cmake --build build
-
-# The build produces:
-# - build/libSCServo.a (static library)
-```
-
-### Install and use from CMake
-
-Installs headers under `include/scservo/` and CMake package files under `lib/cmake/SCServo/`. The imported target is **`SCServo::SCServo`**.
-
-```bash
 cmake -S . -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local
 cmake --build build
 sudo cmake --install build
 ```
 
-In your project:
+### Use in a CMake project
+
+Once the SDK is installed on your machine using either option above, then in your **CMakeLists.txt**:
 
 ```cmake
 find_package(SCServo CONFIG REQUIRED)
 target_link_libraries(my_target PRIVATE SCServo::SCServo)
 ```
 
-With that link line, `#include "SMS_STS.h"` (or `#include "SCServo.h"`) resolves against the installed include directory.
-
-### Pixi package
-
-This follows Pixi’s **C++ package** flow ([tutorial](https://pixi.prefix.dev/latest/build/cpp/)): **`[package]`** + **`pixi-build-cmake`** ([backend](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/)) so **CMake alone** defines build and install (no separate rattler `recipe.yaml`). Enable **`pixi-build`** via `workspace.preview` in `pixi.toml`; the feature is still preview and may change.
-
-Build a local `.conda` from the repo; the artifact is written to **`dist/`**:
-
-```bash
-pixi run build-package
-```
-
-Publish to prefix.dev (same as [Pixi publish docs](https://pixi.sh/latest/reference/cli/pixi/publish/) — API key under **User → Settings → API keys**; `pixi auth login --token … https://prefix.dev` or **`PREFIX_API_KEY`**):
-
-```bash
-pixi publish --to https://prefix.dev/auldbot-forge
-```
-
-Or `pixi run publish-package` (edit the URL in `pixi.toml` if needed).
+With that link line, `#include "SMS_STS.h"` (or `#include "SCServo.h"`) resolves against the installed headers under `include/scservo/`.
 
 ### Serial Port Permissions
 
