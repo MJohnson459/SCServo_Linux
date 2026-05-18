@@ -71,12 +71,11 @@ If you want to include this library in a pixi project, it is published on the `h
 
 ```toml
 [workspace]
-channels = ["https://prefix.dev/robot", ...]
+channels = ["https://prefix.dev/robot"]
 platforms = ["linux-64", "linux-aarch64"]
 
 [dependencies]
 scservo-linux = ">=1.0.0"
-...
 ```
 
 ### From source
