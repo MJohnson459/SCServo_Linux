@@ -67,11 +67,11 @@ A high-performance Linux SDK for controlling Feetech SMS/STS/SCSCL/HLSCL series 
 
 ### Pixi
 
-If you want to include this library in a pixi project, it is published on the `https://prefix.dev/auldbot-forge` public channel.
+If you want to include this library in a pixi project, it is published on the `https://prefix.dev/robot` public channel.
 
 ```toml
 [workspace]
-channels = ["https://prefix.dev/auldbot-forge", ...]
+channels = ["https://prefix.dev/robot", ...]
 platforms = ["linux-64", "linux-aarch64"]
 
 [dependencies]

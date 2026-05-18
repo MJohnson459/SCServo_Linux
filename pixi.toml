@@ -26,4 +26,4 @@ backend = { name = "pixi-build-cmake", version = "*", channels = [
 
 [tasks]
 build = "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build build"
-publish = "pixi publish --to https://prefix.dev/auldbot-forge && pixi publish --target-platform linux-aarch64 --to https://prefix.dev/auldbot-forge"
+publish = "pixi publish --to https://prefix.dev/robot && pixi publish --target-platform linux-aarch64 --to https://prefix.dev/robot"
